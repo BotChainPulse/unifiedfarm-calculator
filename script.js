@@ -1,218 +1,230 @@
-// MODE TOGGLE
-document.getElementById("themeToggle").onclick = () => {
-  document.body.classList.toggle("dark");
-  document.body.classList.toggle("light");
-};
-
-// COLLAPSIBLE LOGIC
-document.querySelectorAll(".collapsible-header").forEach(header => {
-  header.onclick = () => {
-    let content = header.nextElementSibling;
-    content.style.display = content.style.display === "block" ? "none" : "block";
-  };
-});
-
-// DRAWER LOGIC
-function toggleDrawer(id) {
-  let drawer = document.getElementById(id);
-  drawer.style.display = drawer.style.display === "block" ? "none" : "block";
+/* GLOBAL RESET */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
 }
 
-document.getElementById("birdBtn").onclick = () => toggleDrawer("birdDrawer");
-document.getElementById("languageBtn2").onclick = () => toggleDrawer("languageDrawer");
-document.getElementById("currencyBtn2").onclick = () => toggleDrawer("currencyDrawer");
-
-// AUTO-SAVE
-function saveInputs() {
-  let data = {};
-  document.querySelectorAll("input").forEach(input => {
-    data[input.id] = input.value;
-  });
-  localStorage.setItem("farmCalcData", JSON.stringify(data));
-  showSaved();
+/* BODY THEMES */
+body.light {
+    background: #f5f2e9;
+    color: #3a2f1d;
 }
 
-function loadInputs() {
-  let data = JSON.parse(localStorage.getItem("farmCalcData"));
-  if (!data) return;
-  Object.keys(data).forEach(id => {
-    let el = document.getElementById(id);
-    if (el) el.value = data[id];
-  });
+body.dark {
+    background: #1a1a1a;
+    color: #e8e8e8;
 }
 
-loadInputs();
-
-// SAVED INDICATOR
-function showSaved() {
-  let el = document.getElementById("savedIndicator");
-  el.style.opacity = 1;
-  setTimeout(() => el.style.opacity = 0, 1200);
+/* HERO SECTION */
+#hero {
+    background: url("texture/texture.png");
+    background-size: cover;
+    padding: 40px 20px;
+    text-align: center;
+    color: #fff;
 }
 
-// RESET ON BIRD CHANGE
-document.getElementById("birdDrawer").onclick = () => {
-  localStorage.removeItem("farmCalcData");
-  document.querySelectorAll("input").forEach(i => i.value = "");
-  showSaved();
-};
-
-// LIVE AUTO-UPDATE
-document.querySelectorAll("input").forEach(input => {
-  input.oninput = () => {
-    saveInputs();
-    calculate();
-  };
-});
-
-// CALCULATION + ANIMATION
-function animateValue(id, start, end, duration = 600) {
-  let obj = document.getElementById(id);
-  let startTime = null;
-
-  function step(timestamp) {
-    if (!startTime) startTime = timestamp;
-    let progress = timestamp - startTime;
-    let ease = 1 - Math.pow(1 - progress / duration, 3); // ease-out cubic
-    let value = Math.floor(start + (end - start) * ease);
-
-    if (value > 5000) value = 5000;
-    obj.textContent = value;
-
-    if (progress < duration) requestAnimationFrame(step);
-  }
-
-  requestAnimationFrame(step);
+#hero h1 {
+    font-size: 28px;
+    font-weight: bold;
 }
 
-function calculate() {
-  let profit = Math.floor(Math.random() * 5000);
-  animateValue("resultValues", 0, profit);
-}
-const birds = {
-  broiler: {
-    name: "Broiler",
-    fcr: 1.65,
-    maturityDays: 42,
-    avgWeight: 2.5,
-    mortality: 5
-  },
-  layer: {
-    name: "Layer",
-    fcr: 2.2,
-    maturityDays: 150,
-    avgWeight: 1.8,
-    mortality: 8
-  },
-  kuroiler: {
-    name: "Kuroiler",
-    fcr: 2.4,
-    maturityDays: 90,
-    avgWeight: 2.2,
-    mortality: 7
-  },
-  sasso: {
-    name: "Sasso",
-    fcr: 2.3,
-    maturityDays: 85,
-    avgWeight: 2.4,
-    mortality: 6
-  },
-  duck: {
-    name: "Duck",
-    fcr: 2.8,
-    maturityDays: 60,
-    avgWeight: 3.0,
-    mortality: 10
-  },
-  turkey: {
-    name: "Turkey",
-    fcr: 3.0,
-    maturityDays: 120,
-    avgWeight: 8.0,
-    mortality: 12
-  },
-  guinea: {
-    name: "Guinea Fowl",
-    fcr: 2.7,
-    maturityDays: 90,
-    avgWeight: 1.6,
-    mortality: 9
-  },
-  quail: {
-    name: "Quail",
-    fcr: 2.5,
-    maturityDays: 45,
-    avgWeight: 0.25,
-    mortality: 15
-  }
-};
-function calculate() {
-  let n = Number(numBirds.value);
-  let weight = Number(avgWeight.value);
-  let fcrVal = Number(fcr.value);
-  let feedCostVal = Number(feedCost.value);
-  let chick = Number(chickCost.value);
-  let vac = Number(vaccineCost.value);
-  let house = Number(housingCost.value);
-  let labor = Number(laborCost.value);
-  let price = Number(sellPrice.value);
-  let mort = Number(mortality.value) / 100;
-
-  let survivors = n * (1 - mort);
-  let feedIntake = weight * fcrVal;
-  let feedTotalCost = feedIntake * feedCostVal * survivors;
-
-  let chickTotal = chick * n;
-  let vacTotal = vac * n;
-  let houseTotal = house * n;
-
-  let totalCost = feedTotalCost + chickTotal + vacTotal + houseTotal + labor;
-  let revenue = survivors * price;
-  let profit = revenue - totalCost;
-
-  animateValue("resultValues", 0, profit);
-}
-let premium = false;
-
-function lockPremium() {
-  if (!premium) {
-    document.querySelectorAll(".premium").forEach(el => {
-      el.style.opacity = 0.3;
-      el.style.pointerEvents = "none";
-    });
-  }
+#hero p {
+    margin-top: 10px;
+    font-size: 16px;
 }
 
-lockPremium();
-premium = true;
-lockPremium();
-const lang = {
-  en: {
-    birds: "Bird Information",
-    feed: "Feed Requirements",
-    costs: "Cost Inputs",
-    profit: "Profit Calculation",
-    summary: "Summary"
-  },
-  lg: {
-    birds: "Ebikwata ku Nnume",
-    feed: "Ebyokulya",
-    costs: "Ebikozesebwa",
-    profit: "Okufunamu",
-    summary: "Okusumulula"
-  }
-};
-
-function setLanguage(code) {
-  document.querySelector("#groupBirdInfo .collapsible-header").textContent = lang[code].birds;
-  document.querySelector("#groupFeed .collapsible-header").textContent = lang[code].feed;
-  document.querySelector("#groupCosts .collapsible-header").textContent = lang[code].costs;
-  document.querySelector("#groupProfit .collapsible-header").textContent = lang[code].profit;
-  document.querySelector("#results h2").textContent = lang[code].summary;
+.hero-buttons {
+    margin-top: 20px;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 10px;
 }
-let currencySymbol = "$";
 
-function setCurrency(symbol) {
-  currencySymbol = symbol;
+.hero-buttons button {
+    padding: 10px 16px;
+    border: none;
+    background: #d4a24c;
+    color: #fff;
+    border-radius: 6px;
+    cursor: pointer;
+    font-weight: bold;
+}
+
+#heroLinks {
+    margin-top: 20px;
+}
+
+#heroLinks a {
+    margin: 0 10px;
+    color: #fff;
+    font-weight: bold;
+    text-decoration: underline;
+}
+
+/* PREMIUM SECTION */
+#premium {
+    padding: 20px;
+    background: #fff;
+    margin: 20px;
+    border-radius: 8px;
+}
+
+#premium h2 {
+    color: #8b5e2a;
+    margin-bottom: 10px;
+}
+
+#premium ul li {
+    margin: 6px 0;
+}
+
+/* COMMENTS */
+#comments {
+    padding: 20px;
+    margin: 20px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+#comments textarea {
+    width: 100%;
+    height: 80px;
+    padding: 10px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+#comments button {
+    margin-top: 10px;
+    padding: 10px 16px;
+    background: #d4a24c;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* CALCULATOR SECTION */
+#calculator {
+    padding: 20px;
+    margin: 20px;
+    background: #fff;
+    border-radius: 8px;
+}
+
+/* TOP CONTROLS */
+#calcControls {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+}
+
+#calcControls button {
+    padding: 10px 16px;
+    background: #8b5e2a;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+}
+
+/* DRAWERS */
+.drawer {
+    display: none;
+    background: #f0e6d2;
+    padding: 15px;
+    margin-bottom: 15px;
+    border-radius: 6px;
+}
+
+/* COLLAPSIBLE GROUPS */
+.collapsible-group {
+    margin-bottom: 15px;
+    border: 1px solid #d4c4a8;
+    border-radius: 6px;
+    overflow: hidden;
+}
+
+.collapsible-header {
+    background: #8b5e2a;
+    color: #fff;
+    padding: 12px;
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.collapsible-content {
+    display: none;
+    padding: 15px;
+    background: #fff;
+}
+
+.collapsible-content label {
+    display: block;
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+.collapsible-content input {
+    width: 100%;
+    padding: 8px;
+    margin-top: 4px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+}
+
+/* RESULTS */
+#results {
+    margin-top: 20px;
+    padding: 20px;
+    background: #f0e6d2;
+    border-radius: 8px;
+}
+
+#results h2 {
+    margin-bottom: 10px;
+    color: #8b5e2a;
+}
+
+/* SAVED INDICATOR */
+#savedIndicator {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: #8b5e2a;
+    color: #fff;
+    padding: 10px 16px;
+    border-radius: 6px;
+    display: none;
+    animation: fadeOut 2s forwards;
+}
+
+@keyframes fadeOut {
+    0% { opacity: 1; }
+    100% { opacity: 0; }
+}
+
+/* BUTTON HOVER */
+button:hover {
+    opacity: 0.85;
+}
+
+/* MOBILE RESPONSIVE */
+@media (max-width: 600px) {
+    #hero h1 {
+        font-size: 22px;
+    }
+
+    .hero-buttons button {
+        width: 100%;
+    }
+
+    #calcControls button {
+        width: 100%;
+    }
 }
