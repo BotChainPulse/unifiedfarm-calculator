@@ -1,1 +1,116 @@
+/* GLOBAL RESET */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Inter", sans-serif;
+}
 
+/* LIGHT & DARK MODE */
+body.light {
+  background: #f7f3e9;
+  color: #222;
+}
+
+body.dark {
+  background: #0d0d0d;
+  color: #f7f3e9;
+}
+
+/* HERO SECTION */
+#hero {
+  text-align: center;
+  padding: 40px 20px;
+}
+
+#hero h1 {
+  font-size: 2rem;
+  font-weight: 700;
+}
+
+#hero p {
+  margin-top: 10px;
+  opacity: 0.8;
+}
+
+.hero-buttons button,
+.hero-controls button {
+  margin: 10px;
+  padding: 12px 20px;
+  border: none;
+  background: #5a3e2b;
+  color: #e6c46a;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+#premiumBanner {
+  margin-top: 15px;
+  padding: 8px;
+  background: #ffd70022;
+  color: #e6c46a;
+  font-weight: 600;
+}
+
+/* COLLAPSIBLE GROUPS */
+.collapsible-group {
+  margin: 20px 0;
+  border: 1px solid #e6c46a;
+}
+
+.collapsible-header {
+  background: url('texture.png'), #5a3e2b;
+  background-size: cover;
+  padding: 15px;
+  color: #e6c46a;
+  font-weight: 500;
+  cursor: pointer;
+  border-bottom: 1px solid #e6c46a;
+}
+
+.collapsible-content {
+  display: none;
+  padding: 15px;
+  background: #fff;
+}
+
+body.dark .collapsible-content {
+  background: #111;
+}
+
+/* RESULTS SECTION */
+#results {
+  margin-top: 30px;
+  padding: 20px;
+  border: 2px solid #e6c46a;
+}
+
+#resultValues {
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: #e6c46a;
+}
+
+/* DRAWERS */
+.drawer {
+  display: none;
+  padding: 15px;
+  border: 1px solid #e6c46a;
+  background: #fff;
+}
+
+body.dark .drawer {
+  background: #111;
+}
+
+/* SAVED INDICATOR */
+#savedIndicator {
+  position: fixed;
+  bottom: 20px;
+  right: 20px;
+  background: #5a3e2b;
+  color: #e6c46a;
+  padding: 10px 15px;
+  opacity: 0;
+  transition: opacity 0.4s ease-out;
+}
