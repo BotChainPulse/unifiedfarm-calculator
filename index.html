@@ -1,85 +1,139 @@
-<section id="hero">
-  <h1>Unified Farm BLM Poultry Calculator</h1>
-  <p>Your complete poultry farming companion</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Unified Farm BLM Poultry Calculator</title>
 
-  <div class="hero-buttons">
-    <button id="startCalc">Start Calculator</button>
-    <button id="downloadPDF">Download PDF</button>
-  </div>
+  <!-- CSS -->
+  <link rel="stylesheet" href="style.css">
+</head>
 
-  <div class="hero-controls">
-    <button id="languageBtn">Language</button>
-    <button id="currencyBtn">Currency</button>
-    <button id="themeToggle">Light/Dark</button>
-  </div>
+<body class="light">
 
-  <div id="premiumBanner">Premium Available</div>
-</section>
-<section id="intro">
-  <h2>Welcome to Unified Farm BLM</h2>
-  <p>Your trusted partner in poultry farming.</p>
-</section>
-<section id="references">
-  <a href="https://unifiedfarmblm.blogspot.com">Visit Our Blog</a>
-  <a href="https://unifiedfarmblm.com">Visit Our Website</a>
-</section>
-<section id="premiumBenefits">
-  <h2>Premium Features</h2>
-  <ul>
-    <li>All birds unlocked</li>
-    <li>Multi-language support</li>
-    <li>Multi-currency support</li>
-    <li>Ad-free experience</li>
-    <li>Downloadable PDF</li>
-  </ul>
-</section>
-<section id="comments">
-  <h2>Comments</h2>
-  <textarea placeholder="Write your comment..."></textarea>
-  <button id="postComment">Post</button>
-</section>
-<section id="calculator">
+  <!-- HERO -->
+  <section id="hero">
+    <h1>Unified Farm BLM Poultry Calculator</h1>
+    <p>Your complete poultry farming companion</p>
 
-  <!-- Top Drawer Buttons -->
-  <div id="calcControls">
-    <button id="birdBtn">Select Bird</button>
-    <button id="languageBtn2">Language</button>
-    <button id="currencyBtn2">Currency</button>
-  </div>
+    <div class="hero-buttons">
+      <button id="startCalc">Start Calculator</button>
+      <button id="downloadPDF">Download PDF</button>
+    </div>
 
-  <!-- Drawers -->
-  <div id="birdDrawer" class="drawer"></div>
-  <div id="languageDrawer" class="drawer"></div>
-  <div id="currencyDrawer" class="drawer"></div>
+    <div class="hero-controls">
+      <button id="languageBtn">Language</button>
+      <button id="currencyBtn">Currency</button>
+      <button id="themeToggle">Light/Dark</button>
+    </div>
 
-  <!-- Collapsible Groups -->
-  <div class="collapsible-group" id="groupBirdInfo">
-    <div class="collapsible-header">Bird Information</div>
-    <div class="collapsible-content"></div>
-  </div>
+    <div id="premiumBanner">Premium Available</div>
+  </section>
 
-  <div class="collapsible-group" id="groupFeed">
-    <div class="collapsible-header">Feed Requirements</div>
-    <div class="collapsible-content"></div>
-  </div>
+  <!-- INTRO -->
+  <section id="intro">
+    <h2>Welcome to Unified Farm BLM</h2>
+    <p>Your trusted partner in poultry farming.</p>
+  </section>
 
-  <div class="collapsible-group" id="groupCosts">
-    <div class="collapsible-header">Cost Inputs</div>
-    <div class="collapsible-content"></div>
-  </div>
+  <!-- REFERENCES -->
+  <section id="references">
+    <a href="https://unifiedfarmblm.blogspot.com">Visit Our Blog</a>
+    <a href="https://unifiedfarmblm.com">Visit Our Website</a>
+  </section>
 
-  <div class="collapsible-group" id="groupProfit">
-    <div class="collapsible-header">Profit Calculation</div>
-    <div class="collapsible-content"></div>
-  </div>
+  <!-- PREMIUM -->
+  <section id="premiumBenefits">
+    <h2>Premium Features</h2>
+    <ul>
+      <li>All birds unlocked</li>
+      <li>Multi-language support</li>
+      <li>Multi-currency support</li>
+      <li>Ad-free experience</li>
+      <li>Downloadable PDF</li>
+    </ul>
+  </section>
 
-  <!-- Results (Always Open) -->
-  <div id="results">
-    <h2>Summary</h2>
-    <div id="resultValues"></div>
-  </div>
+  <!-- COMMENTS -->
+  <section id="comments">
+    <h2>Comments</h2>
+    <textarea placeholder="Write your comment..."></textarea>
+    <button id="postComment">Post</button>
+  </section>
 
-  <!-- Saved Indicator -->
-  <div id="savedIndicator">Saved</div>
+  <!-- CALCULATOR -->
+  <section id="calculator">
 
-</section>
+    <div id="calcControls">
+      <button id="birdBtn">Select Bird</button>
+      <button id="languageBtn2">Language</button>
+      <button id="currencyBtn2">Currency</button>
+    </div>
+
+    <div id="birdDrawer" class="drawer"></div>
+    <div id="languageDrawer" class="drawer"></div>
+    <div id="currencyDrawer" class="drawer"></div>
+
+    <div class="collapsible-group" id="groupBirdInfo">
+      <div class="collapsible-header">Bird Information</div>
+      <div class="collapsible-content">
+        <label>Number of Birds</label>
+        <input id="numBirds" type="number">
+
+        <label>Average Weight (kg)</label>
+        <input id="avgWeight" type="number">
+
+        <label>Mortality (%)</label>
+        <input id="mortality" type="number">
+      </div>
+    </div>
+
+    <div class="collapsible-group" id="groupFeed">
+      <div class="collapsible-header">Feed Requirements</div>
+      <div class="collapsible-content">
+        <label>Feed Cost per kg</label>
+        <input id="feedCost" type="number">
+
+        <label>Feed Conversion Ratio (FCR)</label>
+        <input id="fcr" type="number">
+      </div>
+    </div>
+
+    <div class="collapsible-group" id="groupCosts">
+      <div class="collapsible-header">Cost Inputs</div>
+      <div class="collapsible-content">
+        <label>Chick Cost per Bird</label>
+        <input id="chickCost" type="number">
+
+        <label>Vaccination Cost per Bird</label>
+        <input id="vaccineCost" type="number">
+
+        <label>Housing Cost per Bird</label>
+        <input id="housingCost" type="number">
+
+        <label>Labor Cost</label>
+        <input id="laborCost" type="number">
+      </div>
+    </div>
+
+    <div class="collapsible-group" id="groupProfit">
+      <div class="collapsible-header">Profit Calculation</div>
+      <div class="collapsible-content">
+        <label>Selling Price per Bird</label>
+        <input id="sellPrice" type="number">
+      </div>
+    </div>
+
+    <div id="results">
+      <h2>Summary</h2>
+      <div id="resultValues">0</div>
+    </div>
+
+    <div id="savedIndicator">Saved</div>
+
+  </section>
+
+  <!-- JS -->
+  <script src="script.js"></script>
+</body>
+</html>
